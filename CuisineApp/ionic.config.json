@@ -1,5 +1,7 @@
 {
   "name": "CuisineApp",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

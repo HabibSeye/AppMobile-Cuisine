@@ -8,12 +8,12 @@
 </ion-row>
 <ion-row class="form">
   <ion-col size="12">
-      <ion-item>
+      <ion-item [ngClass]="isErrorMail ? 'errorEmail' : 'goodEmail'">
           <ion-label position="floating">Email</ion-label>
-          <ion-input type="email" [(ngModel)]="email"></ion-input>
+          <ion-input (keydown)="checkEmail()" type="email" [(ngModel)]="email"></ion-input>
 
       </ion-item>
-      <ion-item >
+      <ion-item [ngClass]="pass.trim().length < 5 ? 'errorEmail' : 'goodEmail'">
           <ion-label position="floating">Password</ion-label>
           <ion-input type="password" [(ngModel)]="pass"></ion-input>
 
@@ -23,9 +23,8 @@
       <p class="forgot" (click)="forgotPassword()">Forgot Password ?</p>
   </ion-col>
   <ion-col size="12">
-    <ion-button expand="full" class="btnLogin" (click)="loginForm()">Login</ion-button>
+    <ion-button [disabled]="isErrorMail || pass.trim().length < 5" expand="full" class="btnLogin" (click)="loginForm()">Login</ion-button>
 </ion-col>
-<p> You don't have any account ? Register </p>
-
+<p> <a routerLink="/register">You don't have any account ? Register</a> </p>
 </ion-row>
 </ion-content>

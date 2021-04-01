@@ -7,9 +7,17 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AuthService {
-  url:string = 'http://localhost:3000';
+  url:string = 'http://cda.eu-4.evennode.com/api';
 
   constructor(private http: HttpClient) { }
+
+  login(email: string, password: string) {
+    return new Promise((resolve, rejects) => {
+        this.http.post(this.url + '/login', { email: email, password: password }).subscribe((data: any) => {
+            (!data.success) ? rejects(false) : resolve(data);
+        });
+    });
+}
   getProfile() {
     return this.http.get(this.url + '/profil');
 }
