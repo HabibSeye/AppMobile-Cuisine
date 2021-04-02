@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 import { AuthService } from '../../services/auth.service';
-// import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 import { LoadingController } from '@ionic/angular';
 import { ForgotPasswordComponent } from '../../modals/forgot-password/forgot-password.component';
@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     private auth: AuthService,
     private modal: ModalController,
-   // private storage: NativeStorage,
+    private storage: NativeStorage,
     private loading: LoadingController
   ) { }
 
@@ -56,8 +56,8 @@ export class LoginPage implements OnInit {
 
     this.auth.login(this.email, this.pass).then(async (user: any) => (
     console.log(user),
-    // await this.storage.setItem('token', user.token),
-    // await this.storage.setItem('user', user.user),
+     await this.storage.setItem('token', user.token),
+     await this.storage.setItem('user', user.user),
     this.router.navigate(['/home'])
 )).catch(async () => {
    this.email = ''
