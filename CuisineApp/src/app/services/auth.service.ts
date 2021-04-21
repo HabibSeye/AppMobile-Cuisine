@@ -23,7 +23,7 @@ export class AuthService {
 register(user: UserRegister) {
   return new Promise((resolve, rejects) => {
       this.http.post(this.url + '/signup', user).subscribe((data: any) => {
-          (!data.success) ? rejects(data.message): resolve(data);
+          (!data.success) ? rejects(data.message) : resolve(data);
       });
   });
 }

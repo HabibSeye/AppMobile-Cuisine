@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-// import { Router } from '@angular/router';
-// import { ToastController } from '@ionic/angular';
-// import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
+ import { ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 
 
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
@@ -26,7 +26,10 @@ export class RegisterPage implements OnInit {
 
   constructor(
     private camera: Camera,
-    private auth: AuthService
+    private auth: AuthService,
+    private loading: LoadingController,
+    private toast: ToastController,
+    private router: Router
 
   ) { }
 
@@ -45,15 +48,23 @@ checkPhone() {
 
 async register() {
 
-  // const load = await this.loading.create({
-    //  message: 'Please wait...',
-  // });
+   const load = await this.loading.create({
+      message: 'Please wait...',
+   });
  // await load.present();
-  this.user.username = this.user.email.split('@')[0];
-  this.auth.register(this.user).then(async (data) => {
+   this.user.username = this.user.email.split('@')[0];
+   this.auth.register(this.user).then(async (data) => {
     console.log(data);
+    await this.loading.dismiss();
+    this.router.navigate(['/login']);
    }).catch(async (err) => {
     console.log(err);
+    const toast = await this.toast.create({
+      message: err,
+      duration: 2000
+  });
+    toast .present();
+    await this.loading.dismiss();
   });
 }
   uploadPicture() {
