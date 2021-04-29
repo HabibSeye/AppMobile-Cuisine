@@ -8,7 +8,7 @@ import { UserRegister } from '../interfaces/user-register';
   providedIn: 'root'
 })
 export class AuthService {
-  url:string = 'http://cda.eu-4.evennode.com/api';
+  url:string = 'https://cuisine-nodejs.herokuapp.com';
 
   constructor(private http: HttpClient) { }
 
