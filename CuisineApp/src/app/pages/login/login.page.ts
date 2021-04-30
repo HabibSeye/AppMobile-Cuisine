@@ -32,10 +32,10 @@ export class LoginPage implements OnInit {
 
   async ngOnInit() {
     let token;
-    if (this.platform.is("desktop")) {
-            token = localStorage.getItem('token')
+    if (this.platform.is('desktop')) {
+            token = localStorage.getItem('token');
         } else {
-            token = await this.storage.getItem('token')
+            token = await this.storage.getItem('token');
         }
     console.log(token);
     if (token !== undefined && token !== null) {
